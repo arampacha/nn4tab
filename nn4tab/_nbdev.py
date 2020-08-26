@@ -2,9 +2,29 @@
 
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
-index = {"test_func": "00_core.ipynb"}
+index = {"test_func": "00_core.ipynb",
+         "cont_cat_split": "01_data.ipynb",
+         "TabularDataset": "01_data.ipynb",
+         "get_dsets": "01_data.ipynb",
+         "get_dl": "01_data.ipynb",
+         "noop": "02_model.ipynb",
+         "LinearBlock": "02_model.ipynb",
+         "trunc_normal_": "02_model.ipynb",
+         "Embedding": "02_model.ipynb",
+         "TabInputBlock": "02_model.ipynb",
+         "TabularModel": "02_model.ipynb",
+         "get_tabular_model": "02_model.ipynb",
+         "emb_sz_rule": "02_model.ipynb",
+         "emb_sizes": "02_model.ipynb",
+         "AverageMeter": "03_learner.ipynb",
+         "accuracy_binary": "03_learner.ipynb",
+         "Callback": "03_learner.ipynb",
+         "LearnerV0": "03_learner.ipynb"}
 
-modules = ["core.py"]
+modules = ["core.py",
+           "data.py",
+           "model.py",
+           "learner.py"]
 
 doc_url = "https://arampacha.github.io/nn4tab/"
 
