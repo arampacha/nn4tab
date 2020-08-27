@@ -2,6 +2,9 @@
   "nn4tab": {
     "Overview": "/",
     "nn4tab core": "core.html",
-    "Title": "learner.html"
+    "Title": "test_utils.html",
+    "Data": "data.html",
+    "Model": "model.html",
+    "Learner": "learner.html"
   }
 }
