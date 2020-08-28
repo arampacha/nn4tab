@@ -18,8 +18,12 @@ from torch.utils.data import Dataset, DataLoader
 
 import gc
 import typing
+from pathlib import Path
 from math import isclose
 from typing import Sequence, Union, Tuple
+
+# Cell
+from .test_utils import fake_data, test_normalized, test_categorical, test_nans, test_df_processed
 
 # Cell
 class TabularProc():
@@ -33,30 +37,57 @@ class TabularProc():
     def decode(self, x): pass
 
 # Cell
+def _readargs(**kwargs):
+    ds = kwargs.get('ds', None)
+    if ds is not None:
+        return vars(ds)
+    df = kwargs.get('df', None)
+    if df is None:
+        raise RuntimeError("Either dataset or dataframe should be in arguments")
+    cont_names = kwargs.get('cont_names', None)
+    cat_names = kwargs.get('cat_names', None)
+    return {'data':df,
+            'cont_names':cont_names,
+            'cat_names':cat_names}
+
+# Cell
 class Normalize(TabularProc):
     """
     Normalizes continuous features to zero mean and unit variance.
     """
-    def setup(self, df:pd.DataFrame, cont_names:Sequence):
+    def setup(self, data:Union[Dataset, pd.DataFrame], cont_names:Sequence=[]):
         """Store mean and std for columns in cont_names"""
         self.checkup()
-        self.mean = {col: df[col].mean() for col in cont_names}
-        self.std = {col: df[col].std() for col in cont_names}
-        self.is_set = True
+        data, cont_names = self._argcheck(data, cont_names)
+        self.mean = {col: data[col].mean() for col in cont_names}
+        self.std = {col: data[col].std() for col in cont_names}
+        self.isset = True
+
+    def _argcheck(self, data, cont_names):
+        if isinstance(data, Dataset):
+            if not cont_names: cont_names = data.cont_names
+            data = data.data
+        else:
+            if not cont_names:
+                raise Warning("Given no columns to process")
+        return data, cont_names
 
     def encode_one(self, df:pd.DataFrame, col:str):
         return (df[col] - self.mean[col])/self.std[col]
 
-    def encode(self, df:pd.DataFrame, cont_names:Sequence):
+    def encode(self, data:Union[Dataset, pd.DataFrame], cont_names:Sequence=[]):
+        data, cont_names = self._argcheck(data, cont_names)
+        if not self.isset: self.setup(data, cont_names)
         for col in cont_names:
-            df[col] = self.encode_one(df, col)
+            data[col] = self.encode_one(data, col)
 
     def decode_one(self, df:pd.DataFrame, col:str):
         return df[col]*self.std[col] + self.mean[col]
 
-    def decode(self, df:pd.DataFrame, cont_names:Sequence):
+    def decode(self, data:Union[Dataset, pd.DataFrame], cont_names:Sequence=[]):
+        data, cont_names = self._argcheck(data, cont_names)
         for col in cont_names:
-            df[col] = self.decode_one(df, col)
+            data[col] = self.decode_one(data, col)
 
 # Cell
 class FillMissing(TabularProc):
@@ -65,23 +96,33 @@ class FillMissing(TabularProc):
         self.add_bool = add_bool
         self.method = method
 
-    def setup(self, df:pd.DataFrame, cont_names:Sequence, cat_names:Sequence):
+    def setup(self, data:Union[Dataset, pd.DataFrame], cont_names:Sequence=[], cat_names:Sequence=[]):
         self.checkup()
+        data, cont_names = self._argcheck(data, cont_names)
         if self.method == 'mean':
-            self.values = {col:df[col].mean() for col in cont_names}
+            self.values = {col:data[col].mean() for col in cont_names}
         self.cont_names = cont_names
         self.cat_names = cat_names
         self.isset = True
 
-    def encode(self, df:pd.DataFrame, cont_names:Sequence=None):
-        if not cont_names:
-            cont_names = self.cont_names
+    def _argcheck(self, data, cont_names):
+        if isinstance(data, Dataset):
+            if not cont_names: cont_names = data.cont_names
+            data = data.data
+        else:
+            if not cont_names:
+                raise Warning("Given no columns to process")
+        return data, cont_names
+
+    def encode(self, data:Union[Dataset, pd.DataFrame], cont_names:Sequence=[]):
+        data, cont_names = self._argcheck(data, cont_names)
+        if not self.isset: self.setup(data, cont_names)
         for col in cont_names:
-            if not df[col].isna().any():
+            if data[col].notna().all():
                 continue
             if self.add_bool:
-                df[f'{col}_na'] = df[col].isna().astype(np.int8)
-            df[col].fillna(value=self.values[col], inplace=True)
+                data[f'{col}_na'] = data[col].isna().astype(np.int8)
+            data[col].fillna(value=self.values[col], inplace=True)
 
     def decode(self, *args, **kwargs):
         pass
@@ -95,30 +136,49 @@ def _catlist(s:pd.Series):
 # Cell
 class Categorify(TabularProc):
     """Numericalizes categorical columns."""
-    def setup(self, df:pd.DataFrame, cat_names:Sequence):
+    def setup(self, data:Union[Dataset, pd.DataFrame], cat_names:Sequence=[]):
         self.checkup()
-        self.cat = {col: _catlist(df[col].dropna()) for col in cat_names}
+        data, cat_names = self._argcheck(data, cat_names)
+        self.cat = {col: _catlist(data[col].dropna()) for col in cat_names}
         self.i2c = {c: i for i, c in enumerate(self.cat)}
+        self.isset = True
+
+    def _argcheck(self, data, cat_names):
+        if isinstance(data, Dataset):
+            if not cat_names: cat_names = data.cat_names
+            data = data.data
+        else:
+            if not cat_names:
+                raise Warning("Given no columns to process")
+        return data, cat_names
 
     def encode_one(self, df:pd.DataFrame, col:str):
-        return pd.Series(pd.Categorical(test_df[col].fillna('#na'), categories=self.cat[col])).cat.codes
+        return pd.Series(pd.Categorical(df[col].fillna('#na'), categories=self.cat[col])).cat.codes
 
-    def encode(self, df:pd.DataFrame, cat_names:Sequence):
+    def encode(self, data:Union[Dataset, pd.DataFrame], cat_names:Sequence=[]):
+        data, cat_names = self._argcheck(data, cat_names)
+        if not self.isset: self.setup(data, cat_names)
         for col in cat_names:
-            df[col] = self.encode_one(df, col)
+            data[col] = self.encode_one(data, col)
 
     def decode_one(self, df:pd.DataFrame, col:str):
         return pd.Series(pd.Categorical.from_codes(df[col], categories=self.cat[col]))
 
-    def decode(self, df:pd.DataFrame, cat_names:Sequence):
+    def decode(self, data:Union[Dataset, pd.DataFrame], cat_names:Sequence=[]):
+        data, cat_names = self._argcheck(data, cat_names)
         for col in cat_names:
-            df[col] = self.decode_one(df, col)
+            data[col] = self.decode_one(data, col)
 
 # Cell
-def cont_cat_split(df, dep_var=None, max_card=np.inf):
+def cont_cat_split(df, dep_var=None, max_card=np.inf, ignore=[]):
+    """
+    Sugests a split of columns of the dataframe to continuous and categorical ommiting dep_var and
+    ignore. Split is done based on column datatype: float columns and int with cardinality > max_card
+    are treated as continuous, all other - categorical.
+    """
     cont, cat = [], []
     for col in df.columns:
-        if col == dep_var: continue #?? mb change to support multiple dep var
+        if (col == dep_var) or (col in dep_var) or (col in ignore): continue
         if np.issubdtype(df[col].dtype, np.floating) or (len(df[col].unique()) > max_card and np.issubdtype(df[col].dtype, np.integer)):
             cont.append(col)
         else: #?? any condition np.issubdtype(df[col].dtype, np.integer)
@@ -127,30 +187,44 @@ def cont_cat_split(df, dep_var=None, max_card=np.inf):
 
 # Cell
 class TabularDataset(Dataset):
-
-    def __init__(self, df:pd.DataFrame, cat_names:Sequence, cont_names:Sequence, dep_var:Sequence, procs=None):
-        self.data = df
-        self.cat = cat_names
-        self.cont = cont_names
+    """
+    Dataset for continious data.
+    Produces tuple containing numpy arrays:
+        x_cat, x_cont, y
+    """
+    def __init__(self, df:pd.DataFrame, cont_names:Sequence, cat_names:Sequence, dep_var:Sequence,
+                 procs=[], copy=True):
+        self.data = df.copy() if copy else df
+        self.cat_names = cat_names
+        self.cont_names = cont_names
         self.dep_var = dep_var
+        self.procs = procs if isinstance(procs, ProcPipeline) else ProcPipeline(procs)
+        self.procs.encode(self)
 
     def __getitem__(self, idx):
-        return (self.data[self.cat].iloc[idx].to_numpy(dtype=np.long),
-                self.data[self.cont].iloc[idx].to_numpy(dtype=np.float32),
+        return (self.data[self.cat_names].iloc[idx].to_numpy(dtype=np.long),
+                self.data[self.cont_names].iloc[idx].to_numpy(dtype=np.float32),
                 self.data[self.dep_var].iloc[idx].to_numpy(dtype=np.float32))
 
     def __len__(self):
         return len(self.data)
 
+    def _decode(self):
+        self.procs.decode(self)
+
 # Cell
-def get_dsets(df:pd.DataFrame, cat_names:Sequence, cont_names:Sequence, dep_var:Sequence, splits=None, stratify=True):
+def get_dsets(df:pd.DataFrame, cont_names:Sequence, cat_names:Sequence, dep_var:Sequence,
+              procs=[], splits=None, stratify=True):
     if splits:
-        train_df, valid_df = df[splits[0]], df[splits[1]]
+        train_df, valid_df = df[splits[0]].copy(), df[splits[1]].copy()
     else:
         s = df[dep_var[0]] if stratify else None
         train_df, valid_df = train_test_split(df, test_size=0.2, stratify=s)
-    return (TabularDataset(train_df, cat_names, cont_names, dep_var),
-            TabularDataset(valid_df, cat_names, cont_names, dep_var))
+    train_df.reset_index(drop=True, inplace=True)
+    valid_df.reset_index(drop=True, inplace=True)
+    train_ds = TabularDataset(train_df, cont_names, cat_names, dep_var, procs=procs)
+    valid_ds = TabularDataset(valid_df, cont_names, cat_names, dep_var, procs=train_ds.procs)
+    return (train_ds, valid_ds)
 
 # Cell
 def get_dl(ds, bs=512, train=True, drop_last=True):
