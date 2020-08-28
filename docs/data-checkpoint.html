@@ -719,7 +719,7 @@ memory usage: 39.2+ KB
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>{&#39;cat_0&#39;: [&#39;#na&#39;, &#39;B&#39;, &#39;C&#39;, &#39;A&#39;], &#39;cat_1&#39;: [&#39;#na&#39;, &#39;B&#39;, &#39;C&#39;, &#39;A&#39;]}
+<pre>{&#39;cat_0&#39;: [&#39;#na&#39;, &#39;C&#39;, &#39;A&#39;, &#39;B&#39;], &#39;cat_1&#39;: [&#39;#na&#39;, &#39;C&#39;, &#39;B&#39;, &#39;A&#39;]}
 </pre>
 </div>
 </div>
@@ -1007,6 +1007,38 @@ memory usage: 25.5 KB
 </div>
 </div>
 </div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h2 id="ProcPipeline" class="doc_header"><code>class</code> <code>ProcPipeline</code><a href="https://github.com/arampacha/nn4tab/tree/master/nn4tab/data.py#L173" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ProcPipeline</code>(<strong><code>procs</code></strong>:<code>Sequence</code>[<a href="/nn4tab/data.html#TabularProc"><code>TabularProc</code></a>])</p>
+</blockquote>
+<p>Combines data processors into pipeline</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Dataset-and-dataloader">Dataset and dataloader<a class="anchor-link" href="#Dataset-and-dataloader"> </a></h2>
@@ -1031,7 +1063,7 @@ memory usage: 25.5 KB
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="cont_cat_split" class="doc_header"><code>cont_cat_split</code><a href="https://github.com/arampacha/nn4tab/tree/master/nn4tab/data.py#L173" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>cont_cat_split</code>(<strong><code>df</code></strong>, <strong><code>dep_var</code></strong>=<em><code>None</code></em>, <strong><code>max_card</code></strong>=<em><code>inf</code></em>, <strong><code>ignore</code></strong>=<em><code>[]</code></em>)</p>
+<h4 id="cont_cat_split" class="doc_header"><code>cont_cat_split</code><a href="https://github.com/arampacha/nn4tab/tree/master/nn4tab/data.py#L206" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>cont_cat_split</code>(<strong><code>df</code></strong>, <strong><code>dep_var</code></strong>=<em><code>None</code></em>, <strong><code>max_card</code></strong>=<em><code>inf</code></em>, <strong><code>ignore</code></strong>=<em><code>[]</code></em>)</p>
 </blockquote>
 <p>Sugests a split of columns of the dataframe to continuous and categorical ommiting dep_var and
 ignore. Split is done based on column datatype: float columns and int with cardinality &gt; max_card
@@ -1065,7 +1097,7 @@ are treated as continuous, all other - categorical.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="TabularDataset" class="doc_header"><code>class</code> <code>TabularDataset</code><a href="https://github.com/arampacha/nn4tab/tree/master/nn4tab/data.py#L189" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>TabularDataset</code>(<strong><code>df</code></strong>:<code>DataFrame</code>, <strong><code>cont_names</code></strong>:<code>Sequence</code>[<code>T_co</code>], <strong><code>cat_names</code></strong>:<code>Sequence</code>[<code>T_co</code>], <strong><code>dep_var</code></strong>:<code>Sequence</code>[<code>T_co</code>], <strong><code>procs</code></strong>=<em><code>[]</code></em>, <strong><code>copy</code></strong>=<em><code>True</code></em>) :: <code>Dataset</code></p>
+<h2 id="TabularDataset" class="doc_header"><code>class</code> <code>TabularDataset</code><a href="https://github.com/arampacha/nn4tab/tree/master/nn4tab/data.py#L222" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>TabularDataset</code>(<strong><code>df</code></strong>:<code>DataFrame</code>, <strong><code>cont_names</code></strong>:<code>Sequence</code>[<code>T_co</code>], <strong><code>cat_names</code></strong>:<code>Sequence</code>[<code>T_co</code>], <strong><code>dep_var</code></strong>:<code>Sequence</code>[<code>T_co</code>], <strong><code>procs</code></strong>=<em><code>[]</code></em>, <strong><code>copy</code></strong>=<em><code>True</code></em>) :: <code>Dataset</code></p>
 </blockquote>
 <p>Dataset for continious data.
 Produces tuple containing numpy arrays:
@@ -1280,23 +1312,7 @@ memory usage: 39.2+ KB
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">pipe</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">ds</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ds</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="n">ds</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -1352,7 +1368,7 @@ memory usage: 39.2+ KB
       <td>1.466304</td>
       <td>2.773549e-08</td>
       <td>0</td>
-      <td>2</td>
+      <td>1</td>
       <td>1.0</td>
       <td>0</td>
       <td>0</td>
@@ -1367,7 +1383,7 @@ memory usage: 39.2+ KB
       <td>1.466657</td>
       <td>-0.767848</td>
       <td>-2.901395e-01</td>
-      <td>3</td>
+      <td>2</td>
       <td>3</td>
       <td>1.0</td>
       <td>0</td>
@@ -1383,7 +1399,7 @@ memory usage: 39.2+ KB
       <td>-1.611295</td>
       <td>0.373895</td>
       <td>-1.118203e-01</td>
-      <td>2</td>
+      <td>1</td>
       <td>0</td>
       <td>0.0</td>
       <td>0</td>
@@ -1399,7 +1415,7 @@ memory usage: 39.2+ KB
       <td>0.246211</td>
       <td>-1.702093</td>
       <td>1.515969e+00</td>
-      <td>3</td>
+      <td>2</td>
       <td>3</td>
       <td>0.0</td>
       <td>0</td>
@@ -1415,8 +1431,8 @@ memory usage: 39.2+ KB
       <td>-0.054587</td>
       <td>1.420521</td>
       <td>-5.015854e-01</td>
-      <td>2</td>
       <td>1</td>
+      <td>2</td>
       <td>0.0</td>
       <td>0</td>
       <td>0</td>
@@ -1482,124 +1498,6 @@ memory usage: 39.2+ KB
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ds</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>cont_0</th>
-      <th>cont_1</th>
-      <th>cont_2</th>
-      <th>cont_3</th>
-      <th>cont_4</th>
-      <th>cat_0</th>
-      <th>cat_1</th>
-      <th>targ</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>0.237776</td>
-      <td>4.726856</td>
-      <td>0.328851</td>
-      <td>5.035037</td>
-      <td>1.793174</td>
-      <td>C</td>
-      <td>C</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>-0.165130</td>
-      <td>4.755350</td>
-      <td>1.774184</td>
-      <td>1.690559</td>
-      <td>2.819697</td>
-      <td>A</td>
-      <td>A</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>-0.801118</td>
-      <td>5.582966</td>
-      <td>-5.896749</td>
-      <td>3.399724</td>
-      <td>3.353442</td>
-      <td>C</td>
-      <td>B</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>-2.345072</td>
-      <td>4.445452</td>
-      <td>-1.267434</td>
-      <td>0.292013</td>
-      <td>8.225743</td>
-      <td>A</td>
-      <td>A</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>-3.939306</td>
-      <td>-1.294417</td>
-      <td>-2.017090</td>
-      <td>4.966501</td>
-      <td>2.186796</td>
-      <td>C</td>
-      <td>B</td>
-      <td>0.0</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">pipe</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">ds</span><span class="p">)</span>
 </pre></div>
 
@@ -1621,124 +1519,6 @@ memory usage: 39.2+ KB
 </pre></div>
 
     </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ds</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>cont_0</th>
-      <th>cont_1</th>
-      <th>cont_2</th>
-      <th>cont_3</th>
-      <th>cont_4</th>
-      <th>cat_0</th>
-      <th>cat_1</th>
-      <th>targ</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>0.712654</td>
-      <td>-0.031417</td>
-      <td>0.886253</td>
-      <td>1.480729</td>
-      <td>-0.639405</td>
-      <td>2</td>
-      <td>2</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>0.557549</td>
-      <td>-0.020897</td>
-      <td>1.475774</td>
-      <td>-0.782973</td>
-      <td>-0.294020</td>
-      <td>3</td>
-      <td>3</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>0.312715</td>
-      <td>0.284651</td>
-      <td>-1.653041</td>
-      <td>0.373872</td>
-      <td>-0.114436</td>
-      <td>2</td>
-      <td>1</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>-0.281655</td>
-      <td>-0.135309</td>
-      <td>0.235161</td>
-      <td>-1.729575</td>
-      <td>1.524899</td>
-      <td>3</td>
-      <td>3</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>-0.895380</td>
-      <td>-2.254419</td>
-      <td>-0.070608</td>
-      <td>1.434341</td>
-      <td>-0.506966</td>
-      <td>2</td>
-      <td>1</td>
-      <td>0.0</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
-</div>
-
 </div>
 </div>
 
@@ -1937,8 +1717,8 @@ memory usage: 39.2+ KB
       <td>0.886253</td>
       <td>1.480729</td>
       <td>-0.639405</td>
-      <td>2</td>
-      <td>2</td>
+      <td>1</td>
+      <td>1</td>
       <td>1.0</td>
     </tr>
     <tr>
@@ -1959,8 +1739,8 @@ memory usage: 39.2+ KB
       <td>-1.653041</td>
       <td>0.373872</td>
       <td>-0.114436</td>
-      <td>2</td>
       <td>1</td>
+      <td>2</td>
       <td>0.0</td>
     </tr>
     <tr>
@@ -1981,8 +1761,8 @@ memory usage: 39.2+ KB
       <td>-0.070608</td>
       <td>1.434341</td>
       <td>-0.506966</td>
-      <td>2</td>
       <td>1</td>
+      <td>2</td>
       <td>0.0</td>
     </tr>
   </tbody>
@@ -2041,7 +1821,7 @@ memory usage: 39.2+ KB
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>(array([0, 2]),
+<pre>(array([0, 1]),
  array([ 7.1570003e-01, -3.0404553e-02,  8.8671887e-01,  1.4663039e+00,
          2.7735494e-08], dtype=float32),
  array([1.], dtype=float32))</pre>
@@ -2267,7 +2047,7 @@ memory usage: 30.4 KB
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>(array([ 8,  6,  1,  0,  3,  4,  1, 25]),
+<pre>(array([ 2,  6,  6,  0,  1,  1,  2, 19]),
  array([ 0.76378465, -0.8380709 ,  0.74628264, -0.14591825,  4.5034127 ,
         -0.0354289 ], dtype=float32),
  array([1.], dtype=float32))</pre>
@@ -2305,7 +2085,7 @@ memory usage: 30.4 KB
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_dsets" class="doc_header"><code>get_dsets</code><a href="https://github.com/arampacha/nn4tab/tree/master/nn4tab/data.py#L216" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_dsets</code>(<strong><code>df</code></strong>:<code>DataFrame</code>, <strong><code>cont_names</code></strong>:<code>Sequence</code>[<code>T_co</code>], <strong><code>cat_names</code></strong>:<code>Sequence</code>[<code>T_co</code>], <strong><code>dep_var</code></strong>:<code>Sequence</code>[<code>T_co</code>], <strong><code>procs</code></strong>=<em><code>[]</code></em>, <strong><code>splits</code></strong>=<em><code>None</code></em>, <strong><code>stratify</code></strong>=<em><code>True</code></em>)</p>
+<h4 id="get_dsets" class="doc_header"><code>get_dsets</code><a href="https://github.com/arampacha/nn4tab/tree/master/nn4tab/data.py#L249" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_dsets</code>(<strong><code>df</code></strong>:<code>DataFrame</code>, <strong><code>cont_names</code></strong>:<code>Sequence</code>[<code>T_co</code>], <strong><code>cat_names</code></strong>:<code>Sequence</code>[<code>T_co</code>], <strong><code>dep_var</code></strong>:<code>Sequence</code>[<code>T_co</code>], <strong><code>procs</code></strong>=<em><code>[]</code></em>, <strong><code>splits</code></strong>=<em><code>None</code></em>, <strong><code>stratify</code></strong>=<em><code>True</code></em>)</p>
 </blockquote>
 
 </div>
@@ -2330,205 +2110,6 @@ memory usage: 30.4 KB
 </pre></div>
 
     </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">train_ds</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>26048</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">train_ds</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>age</th>
-      <th>workclass</th>
-      <th>fnlwgt</th>
-      <th>education</th>
-      <th>education-num</th>
-      <th>marital-status</th>
-      <th>occupation</th>
-      <th>relationship</th>
-      <th>race</th>
-      <th>sex</th>
-      <th>capital-gain</th>
-      <th>capital-loss</th>
-      <th>hours-per-week</th>
-      <th>native-country</th>
-      <th>salary</th>
-      <th>education-num_na</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1.575753</td>
-      <td>4</td>
-      <td>-0.793974</td>
-      <td>2</td>
-      <td>-0.417385</td>
-      <td>1</td>
-      <td>14</td>
-      <td>4</td>
-      <td>4</td>
-      <td>2</td>
-      <td>-0.144679</td>
-      <td>-0.217687</td>
-      <td>2.397764</td>
-      <td>25</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>-0.923445</td>
-      <td>8</td>
-      <td>0.656442</td>
-      <td>1</td>
-      <td>-0.028393</td>
-      <td>4</td>
-      <td>1</td>
-      <td>6</td>
-      <td>1</td>
-      <td>2</td>
-      <td>0.147555</td>
-      <td>-0.217687</td>
-      <td>2.803362</td>
-      <td>25</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>0.473166</td>
-      <td>4</td>
-      <td>-0.481905</td>
-      <td>1</td>
-      <td>-0.028393</td>
-      <td>1</td>
-      <td>12</td>
-      <td>4</td>
-      <td>2</td>
-      <td>2</td>
-      <td>-0.144679</td>
-      <td>-0.217687</td>
-      <td>2.560003</td>
-      <td>33</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>0.546671</td>
-      <td>8</td>
-      <td>1.316308</td>
-      <td>2</td>
-      <td>-0.417385</td>
-      <td>1</td>
-      <td>2</td>
-      <td>4</td>
-      <td>4</td>
-      <td>2</td>
-      <td>-0.144679</td>
-      <td>-0.217687</td>
-      <td>-0.035820</td>
-      <td>25</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>-0.996951</td>
-      <td>4</td>
-      <td>-0.122802</td>
-      <td>2</td>
-      <td>-0.417385</td>
-      <td>4</td>
-      <td>8</td>
-      <td>2</td>
-      <td>4</td>
-      <td>2</td>
-      <td>-0.144679</td>
-      <td>-0.217687</td>
-      <td>-0.441417</td>
-      <td>25</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
-</div>
-
 </div>
 </div>
 
@@ -2591,12 +2172,12 @@ memory usage: 30.4 KB
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>age               3.921242e-19
-fnlwgt           -1.011808e-16
-education-num    -1.445532e-16
-capital-gain      8.116417e-16
-capital-loss      8.667011e-17
-hours-per-week    3.625444e-17
+<pre>age              -4.756637e-17
+fnlwgt            1.181999e-16
+education-num    -1.673984e-16
+capital-gain      3.549896e-16
+capital-loss     -1.892255e-16
+hours-per-week   -4.441148e-16
 dtype: float64</pre>
 </div>
 
@@ -2630,12 +2211,12 @@ dtype: float64</pre>
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>age               0.006895
-fnlwgt            0.004656
-education-num     0.013075
-capital-gain      0.000905
-capital-loss     -0.007856
-hours-per-week   -0.001668
+<pre>age               0.000039
+fnlwgt            0.014496
+education-num    -0.000357
+capital-gain      0.016158
+capital-loss     -0.021486
+hours-per-week    0.008863
 dtype: float64</pre>
 </div>
 
@@ -2665,7 +2246,7 @@ dtype: float64</pre>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_dl" class="doc_header"><code>get_dl</code><a href="https://github.com/arampacha/nn4tab/tree/master/nn4tab/data.py#L230" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_dl</code>(<strong><code>ds</code></strong>, <strong><code>bs</code></strong>=<em><code>512</code></em>, <strong><code>train</code></strong>=<em><code>True</code></em>, <strong><code>drop_last</code></strong>=<em><code>True</code></em>)</p>
+<h4 id="get_dl" class="doc_header"><code>get_dl</code><a href="https://github.com/arampacha/nn4tab/tree/master/nn4tab/data.py#L263" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_dl</code>(<strong><code>ds</code></strong>, <strong><code>bs</code></strong>=<em><code>512</code></em>, <strong><code>train</code></strong>=<em><code>True</code></em>, <strong><code>drop_last</code></strong>=<em><code>True</code></em>)</p>
 </blockquote>
 
 </div>

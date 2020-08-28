@@ -100,7 +100,7 @@ def emb_sz_rule(n_cat):
     return min(600, round(1.6 * n_cat**0.56))
 
 # Cell
-def emb_sizes(data, cat_names, emb_voc={}):
-    cat_sz = [len(data[col].unique()) for col in cat_names]
+def emb_sizes(dataset, cat_names, emb_voc={}):
+    cat_sz = [len(dataset.data[col].unique())+1 for col in cat_names]
     emb_sz = [emb_voc.get(col, emb_sz_rule(cat_sz[i])) for i, col in enumerate(cat_names)]
     return list(zip(cat_sz, emb_sz))
