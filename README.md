@@ -2,7 +2,7 @@
 > A minimal implementation of neural network for tabular data.
 
 
-<a href="https://github.com/arampacha/nn4tab/blob/master/_example_adult-clean.ipynb">
+<a href="https://colab.research.google.com/github/arampacha/nn4tab/blob/master/index.ipynb">
   <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
 
@@ -16,11 +16,12 @@ not ready yet
 pip install nn4tab
 ```
 
-instead do:
+one can try out editable install instead:
 
 ```
 git clone https://github.com/arampacha/nn4tab
-pip install nn4tab
+cd nn4tab
+pip install -e .
 ```
 
 ## How to use
