@@ -74,9 +74,9 @@ def fake_data(n=1000, n_cont=5, n_cat=2, task='class', preproc=True, nans=False)
 def test_normalized(df, cont_names):
     """Test if all columns in cont_names of the dataframe are close to standard normal"""
     for m in df[cont_names].mean():
-        assert isclose(m, 0, abs_tol=0.1), f'mean is {m}'
+        assert isclose(m, 0, abs_tol=0.2), f'mean is {m}'
     for s in df[cont_names].std():
-        assert isclose(s, 1, abs_tol=0.1), f'std is {s}'
+        assert isclose(s, 1, abs_tol=0.2), f'std is {s}'
 
 # Cell
 def test_nans(df, cont_names, cat_names):

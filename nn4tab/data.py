@@ -98,30 +98,33 @@ class FillMissing(TabularProc):
 
     def setup(self, data:Union[Dataset, pd.DataFrame], cont_names:Sequence=[], cat_names:Sequence=[]):
         self.checkup()
-        data, cont_names = self._argcheck(data, cont_names)
+        data, cont_names, cat_names = self._argcheck(data, cont_names, cat_names)
         if self.method == 'mean':
             self.values = {col:data[col].mean() for col in cont_names}
         self.cont_names = cont_names
         self.cat_names = cat_names
         self.isset = True
 
-    def _argcheck(self, data, cont_names):
+    def _argcheck(self, data, cont_names, cat_names):
         if isinstance(data, Dataset):
             if not cont_names: cont_names = data.cont_names
+            if not cat_names: cat_names = data.cat_names
             data = data.data
         else:
             if not cont_names:
                 raise Warning("Given no columns to process")
-        return data, cont_names
+        return data, cont_names,cat_names
 
-    def encode(self, data:Union[Dataset, pd.DataFrame], cont_names:Sequence=[]):
-        data, cont_names = self._argcheck(data, cont_names)
-        if not self.isset: self.setup(data, cont_names)
+    def encode(self, data:Union[Dataset, pd.DataFrame], cont_names:Sequence=[], cat_names:Sequence=[]):
+        data, cont_names, cat_names = self._argcheck(data, cont_names, cat_names)
+        if not self.isset: self.setup(data, cont_names, cat_names)
         for col in cont_names:
             if data[col].notna().all():
                 continue
             if self.add_bool:
                 data[f'{col}_na'] = data[col].isna().astype(np.int8)
+                # add name to dataset.cat_names
+                cat_names.append(f'{col}_na')
             data[col].fillna(value=self.values[col], inplace=True)
 
     def decode(self, *args, **kwargs):

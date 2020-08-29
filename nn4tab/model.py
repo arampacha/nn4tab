@@ -89,8 +89,10 @@ class TabularModel(nn.Module):
         return self.lins(self.stem(x_cat, x_cont))
 
 # Cell
-def get_tabular_model(data, cont_names, cat_names, n_out, layers=[200,100], emb_voc={}, emb_drop=0.1, drops=[]):
-    emb_sz = emb_sizes(data, cat_names, emb_voc)
+def get_tabular_model(dataset, n_out, cont_names=[], cat_names=[],  layers=[200,100], emb_voc={}, emb_drop=0.1, drops=[]):
+    if not (cont_names or cat_names):
+        cont_names, cat_names = dataset.cont_names, dataset.cat_names
+    emb_sz = emb_sizes(dataset, cat_names, emb_voc)
     return TabularModel(layers, emb_sz, len(cont_names), n_out, emb_drop=emb_drop, drops=drops)
 
 # Cell
