@@ -1,6 +1,6 @@
 ---
 
-title: Title
+title: Data
 
 keywords: fastai
 sidebar: home_sidebar
@@ -42,6 +42,19 @@ nb_path: ".ipynb_checkpoints\01_data-checkpoint.ipynb"
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Processors">Processors<a class="anchor-link" href="#Processors"> </a></h2>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -53,7 +66,7 @@ nb_path: ".ipynb_checkpoints\01_data-checkpoint.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="cont_cat_split" class="doc_header"><code>cont_cat_split</code><a href="https://github.com/arampacha/nn4tab/tree/master/nn4tab/data.py#L23" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>cont_cat_split</code>(<strong><code>df</code></strong>, <strong><code>dep_var</code></strong>=<em><code>None</code></em>, <strong><code>max_card</code></strong>=<em><code>inf</code></em>)</p>
+<h2 id="TabularProc" class="doc_header"><code>class</code> <code>TabularProc</code><a href="https://github.com/arampacha/nn4tab/tree/master/nn4tab/data.py#L29" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>TabularProc</code>()</p>
 </blockquote>
 
 </div>
@@ -73,6 +86,39 @@ nb_path: ".ipynb_checkpoints\01_data-checkpoint.ipynb"
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Normalize-proc">Normalize proc<a class="anchor-link" href="#Normalize-proc"> </a></h3>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">print_stat</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="o">*</span><span class="mi">15</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">cont_names</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s1">: mean= </span><span class="si">{</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">, std = </span><span class="si">{</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">()</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -84,19 +130,9 @@ nb_path: ".ipynb_checkpoints\01_data-checkpoint.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="TabularDataset" class="doc_header"><code>class</code> <code>TabularDataset</code><a href="https://github.com/arampacha/nn4tab/tree/master/nn4tab/data.py#L34" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>TabularDataset</code>(<strong><code>df</code></strong>:<code>DataFrame</code>, <strong><code>cat_names</code></strong>:<code>Sequence</code>[<code>T_co</code>], <strong><code>cont_names</code></strong>:<code>Sequence</code>[<code>T_co</code>], <strong><code>dep_var</code></strong>:<code>Sequence</code>[<code>T_co</code>]) :: <code>Dataset</code></p>
+<h2 id="Normalize" class="doc_header"><code>class</code> <code>Normalize</code><a href="https://github.com/arampacha/nn4tab/tree/master/nn4tab/data.py#L54" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Normalize</code>() :: <a href="/nn4tab/data.html#TabularProc"><code>TabularProc</code></a></p>
 </blockquote>
-<p>An abstract class representing a :class:<code>Dataset</code>.</p>
-<p>All datasets that represent a map from keys to data samples should subclass
-it. All subclasses should overwrite :meth:<code>__getitem__</code>, supporting fetching a
-data sample for a given key. Subclasses could also optionally overwrite
-:meth:<code>__len__</code>, which is expected to return the size of the dataset by many
-:class:<code>~torch.utils.data.Sampler</code> implementations and the default options
-of :class:<code>~torch.utils.data.DataLoader</code>.</p>
-<p>.. note::
-  :class:<code>~torch.utils.data.DataLoader</code> by default constructs a index
-  sampler that yields integral indices.  To make it work with a map-style
-  dataset with non-integral indices/keys, a custom sampler must be provided.</p>
+<p>Normalizes continuous features to zero mean and unit variance.</p>
 
 </div>
 
@@ -108,6 +144,273 @@ of :class:<code>~torch.utils.data.DataLoader</code>.</p>
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Test-1">Test 1<a class="anchor-link" href="#Test-1"> </a></h4>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="p">,</span> <span class="n">cont_names</span><span class="p">,</span> <span class="n">cat_names</span> <span class="o">=</span> <span class="n">fake_data</span><span class="p">(</span><span class="n">preproc</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">test_df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 1000 entries, 0 to 999
+Data columns (total 8 columns):
+ #   Column  Non-Null Count  Dtype  
+---  ------  --------------  -----  
+ 0   cont_0  1000 non-null   float32
+ 1   cont_1  1000 non-null   float32
+ 2   cont_2  1000 non-null   float32
+ 3   cont_3  1000 non-null   float32
+ 4   cont_4  1000 non-null   float32
+ 5   cat_0   1000 non-null   object 
+ 6   cat_1   1000 non-null   object 
+ 7   targ    1000 non-null   float32
+dtypes: float32(6), object(2)
+memory usage: 39.2+ KB
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">norm</span> <span class="o">=</span> <span class="n">Normalize</span><span class="p">()</span>
+<span class="n">norm</span><span class="o">.</span><span class="n">setup</span><span class="p">(</span><span class="n">test_df</span><span class="p">,</span> <span class="n">cont_names</span><span class="p">)</span>
+
+<span class="n">print_stat</span><span class="p">(</span><span class="n">test_df</span><span class="p">)</span>
+
+<span class="n">norm</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">test_df</span><span class="p">,</span> <span class="n">cont_names</span><span class="p">)</span>
+
+<span class="n">print_stat</span><span class="p">(</span><span class="n">test_df</span><span class="p">)</span>
+
+<span class="n">test_normalized</span><span class="p">(</span><span class="n">test_df</span><span class="p">,</span> <span class="n">cont_names</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>***************
+cont_0: mean= -1.6134, std = 2.5976
+cont_1: mean= 4.8120, std = 2.7086
+cont_2: mean= -1.8440, std = 2.4517
+cont_3: mean= 2.8474, std = 1.4774
+cont_4: mean= 3.6936, std = 2.9721
+***************
+cont_0: mean= 0.0000, std = 1.0000
+cont_1: mean= 0.0000, std = 1.0000
+cont_2: mean= -0.0000, std = 1.0000
+cont_3: mean= 0.0000, std = 1.0000
+cont_4: mean= -0.0000, std = 1.0000
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">norm</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">test_df</span><span class="p">,</span> <span class="n">cont_names</span><span class="p">)</span>
+
+<span class="n">print_stat</span><span class="p">(</span><span class="n">test_df</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">(</span><span class="n">test_df</span><span class="p">[</span><span class="n">cont_names</span><span class="p">]</span> <span class="o">-</span> <span class="n">df</span><span class="p">[</span><span class="n">cont_names</span><span class="p">])</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">():</span>
+    <span class="k">assert</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mf">1e-4</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>***************
+cont_0: mean= -1.6134, std = 2.5976
+cont_1: mean= 4.8120, std = 2.7086
+cont_2: mean= -1.8440, std = 2.4517
+cont_3: mean= 2.8474, std = 1.4774
+cont_4: mean= 3.6936, std = 2.9721
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Test-2">Test 2<a class="anchor-link" href="#Test-2"> </a></h4>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="p">,</span> <span class="n">cont_names</span><span class="p">,</span> <span class="n">cat_names</span> <span class="o">=</span> <span class="n">fake_data</span><span class="p">()</span>
+<span class="n">test_df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">norm</span> <span class="o">=</span> <span class="n">Normalize</span><span class="p">()</span>
+<span class="n">norm</span><span class="o">.</span><span class="n">setup</span><span class="p">(</span><span class="n">test_df</span><span class="p">,</span> <span class="n">cont_names</span><span class="p">)</span>
+
+<span class="n">print_stat</span><span class="p">(</span><span class="n">test_df</span><span class="p">)</span>
+
+<span class="n">norm</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">test_df</span><span class="p">,</span> <span class="n">cont_names</span><span class="p">)</span>
+
+<span class="n">print_stat</span><span class="p">(</span><span class="n">test_df</span><span class="p">)</span>
+
+<span class="n">test_normalized</span><span class="p">(</span><span class="n">test_df</span><span class="p">,</span> <span class="n">cont_names</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>***************
+cont_0: mean= 0.0436, std = 1.0146
+cont_1: mean= -0.0250, std = 0.9849
+cont_2: mean= -0.0127, std = 0.9841
+cont_3: mean= -0.0235, std = 1.0335
+cont_4: mean= -0.0028, std = 1.0229
+***************
+cont_0: mean= 0.0000, std = 1.0000
+cont_1: mean= 0.0000, std = 1.0000
+cont_2: mean= -0.0000, std = 1.0000
+cont_3: mean= -0.0000, std = 1.0000
+cont_4: mean= 0.0000, std = 1.0000
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">norm</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">test_df</span><span class="p">,</span> <span class="n">cont_names</span><span class="p">)</span>
+
+<span class="n">print_stat</span><span class="p">(</span><span class="n">test_df</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">(</span><span class="n">test_df</span><span class="p">[</span><span class="n">cont_names</span><span class="p">]</span> <span class="o">-</span> <span class="n">df</span><span class="p">[</span><span class="n">cont_names</span><span class="p">])</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">():</span>
+    <span class="k">assert</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mf">1e-4</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>***************
+cont_0: mean= 0.0436, std = 1.0146
+cont_1: mean= -0.0250, std = 0.9849
+cont_2: mean= -0.0127, std = 0.9841
+cont_3: mean= -0.0235, std = 1.0335
+cont_4: mean= -0.0028, std = 1.0229
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="FillMissing-proc">FillMissing proc<a class="anchor-link" href="#FillMissing-proc"> </a></h3>
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -126,8 +429,684 @@ of :class:<code>~torch.utils.data.DataLoader</code>.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_dsets" class="doc_header"><code>get_dsets</code><a href="https://github.com/arampacha/nn4tab/tree/master/nn4tab/data.py#L51" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_dsets</code>(<strong><code>df</code></strong>:<code>DataFrame</code>, <strong><code>cat_names</code></strong>:<code>Sequence</code>[<code>T_co</code>], <strong><code>cont_names</code></strong>:<code>Sequence</code>[<code>T_co</code>], <strong><code>dep_var</code></strong>:<code>Sequence</code>[<code>T_co</code>], <strong><code>splits</code></strong>=<em><code>None</code></em>, <strong><code>stratify</code></strong>=<em><code>True</code></em>)</p>
+<h2 id="FillMissing" class="doc_header"><code>class</code> <code>FillMissing</code><a href="https://github.com/arampacha/nn4tab/tree/master/nn4tab/data.py#L93" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>FillMissing</code>(<strong><code>add_bool</code></strong>=<em><code>True</code></em>, <strong><code>method</code></strong>=<em><code>'mean'</code></em>) :: <a href="/nn4tab/data.html#TabularProc"><code>TabularProc</code></a></p>
 </blockquote>
+<p>Fills missing values in continuous columns</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Tests">Tests<a class="anchor-link" href="#Tests"> </a></h4>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="p">,</span> <span class="n">cont_names</span><span class="p">,</span> <span class="n">cat_names</span> <span class="o">=</span> <span class="n">fake_data</span><span class="p">(</span><span class="n">nans</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 1000 entries, 0 to 999
+Data columns (total 8 columns):
+ #   Column  Non-Null Count  Dtype  
+---  ------  --------------  -----  
+ 0   cont_0  883 non-null    float32
+ 1   cont_1  899 non-null    float32
+ 2   cont_2  912 non-null    float32
+ 3   cont_3  902 non-null    float32
+ 4   cont_4  894 non-null    float32
+ 5   cat_0   891 non-null    float64
+ 6   cat_1   902 non-null    float64
+ 7   targ    1000 non-null   float32
+dtypes: float32(6), float64(2)
+memory usage: 39.2 KB
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">fillproc</span> <span class="o">=</span> <span class="n">FillMissing</span><span class="p">()</span>
+<span class="n">fillproc</span><span class="o">.</span><span class="n">setup</span><span class="p">(</span><span class="n">test_df</span><span class="p">,</span> <span class="n">cont_names</span><span class="p">,</span> <span class="n">cat_names</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">fillproc</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">cont_names</span><span class="p">,</span> <span class="n">cat_names</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 1000 entries, 0 to 999
+Data columns (total 13 columns):
+ #   Column     Non-Null Count  Dtype  
+---  ------     --------------  -----  
+ 0   cont_0     1000 non-null   float32
+ 1   cont_1     1000 non-null   float32
+ 2   cont_2     1000 non-null   float32
+ 3   cont_3     1000 non-null   float32
+ 4   cont_4     1000 non-null   float32
+ 5   cat_0      891 non-null    float64
+ 6   cat_1      902 non-null    float64
+ 7   targ       1000 non-null   float32
+ 8   cont_0_na  1000 non-null   int8   
+ 9   cont_1_na  1000 non-null   int8   
+ 10  cont_2_na  1000 non-null   int8   
+ 11  cont_3_na  1000 non-null   int8   
+ 12  cont_4_na  1000 non-null   int8   
+dtypes: float32(6), float64(2), int8(5)
+memory usage: 44.1 KB
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cat_names</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&#39;cat_0&#39;,
+ &#39;cat_1&#39;,
+ &#39;cont_0_na&#39;,
+ &#39;cont_1_na&#39;,
+ &#39;cont_2_na&#39;,
+ &#39;cont_3_na&#39;,
+ &#39;cont_4_na&#39;]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">test_nans</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">cont_names</span><span class="p">,</span> <span class="n">cat_names</span><span class="o">=</span><span class="p">[])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Categorify-proc">Categorify proc<a class="anchor-link" href="#Categorify-proc"> </a></h3>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h2 id="Categorify" class="doc_header"><code>class</code> <code>Categorify</code><a href="https://github.com/arampacha/nn4tab/tree/master/nn4tab/data.py#L140" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Categorify</code>() :: <a href="/nn4tab/data.html#TabularProc"><code>TabularProc</code></a></p>
+</blockquote>
+<p>Numericalizes categorical columns.</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Test-1">Test 1<a class="anchor-link" href="#Test-1"> </a></h4>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="p">,</span> <span class="n">cont_names</span><span class="p">,</span> <span class="n">cat_names</span> <span class="o">=</span> <span class="n">fake_data</span><span class="p">(</span><span class="n">preproc</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">nans</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">test_df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 1000 entries, 0 to 999
+Data columns (total 8 columns):
+ #   Column  Non-Null Count  Dtype  
+---  ------  --------------  -----  
+ 0   cont_0  883 non-null    float32
+ 1   cont_1  899 non-null    float32
+ 2   cont_2  912 non-null    float32
+ 3   cont_3  902 non-null    float32
+ 4   cont_4  894 non-null    float32
+ 5   cat_0   891 non-null    object 
+ 6   cat_1   901 non-null    object 
+ 7   targ    1000 non-null   float32
+dtypes: float32(6), object(2)
+memory usage: 39.2+ KB
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cproc</span> <span class="o">=</span> <span class="n">Categorify</span><span class="p">()</span>
+<span class="n">cproc</span><span class="o">.</span><span class="n">setup</span><span class="p">(</span><span class="n">test_df</span><span class="p">,</span> <span class="n">cat_names</span><span class="p">)</span>
+
+<span class="k">assert</span> <span class="n">cproc</span><span class="o">.</span><span class="n">isset</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cproc</span><span class="o">.</span><span class="n">cat</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>{&#39;cat_0&#39;: [&#39;#na&#39;, &#39;A&#39;, &#39;B&#39;, &#39;C&#39;], &#39;cat_1&#39;: [&#39;#na&#39;, &#39;A&#39;, &#39;B&#39;, &#39;C&#39;]}
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cproc</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">test_df</span><span class="p">,</span> <span class="n">cat_names</span><span class="p">)</span>
+
+<span class="n">test_df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 1000 entries, 0 to 999
+Data columns (total 8 columns):
+ #   Column  Non-Null Count  Dtype  
+---  ------  --------------  -----  
+ 0   cont_0  883 non-null    float32
+ 1   cont_1  899 non-null    float32
+ 2   cont_2  912 non-null    float32
+ 3   cont_3  902 non-null    float32
+ 4   cont_4  894 non-null    float32
+ 5   cat_0   1000 non-null   int8   
+ 6   cat_1   1000 non-null   int8   
+ 7   targ    1000 non-null   float32
+dtypes: float32(6), int8(2)
+memory usage: 25.5 KB
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">cat_names</span><span class="p">:</span>
+    <span class="k">assert</span> <span class="nb">sum</span><span class="p">(</span><span class="n">test_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">(),</span> <span class="n">col</span><span class="p">])</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;Error when handling nans in </span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s1">&#39;</span>
+    <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">test_df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">integer</span><span class="p">),</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s1"> dtype is not int&#39;</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cproc</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">test_df</span><span class="p">,</span> <span class="n">cat_names</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">cat_names</span><span class="p">:</span>
+    <span class="k">assert</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">notna</span><span class="p">(),</span> <span class="n">col</span><span class="p">]</span> <span class="o">==</span> <span class="n">test_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">notna</span><span class="p">(),</span> <span class="n">col</span><span class="p">])</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Test-2">Test 2<a class="anchor-link" href="#Test-2"> </a></h4>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="p">,</span> <span class="n">cont_names</span><span class="p">,</span> <span class="n">cat_names</span> <span class="o">=</span> <span class="n">fake_data</span><span class="p">()</span>
+<span class="n">test_df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 1000 entries, 0 to 999
+Data columns (total 8 columns):
+ #   Column  Non-Null Count  Dtype  
+---  ------  --------------  -----  
+ 0   cont_0  1000 non-null   float32
+ 1   cont_1  1000 non-null   float32
+ 2   cont_2  1000 non-null   float32
+ 3   cont_3  1000 non-null   float32
+ 4   cont_4  1000 non-null   float32
+ 5   cat_0   1000 non-null   int64  
+ 6   cat_1   1000 non-null   int64  
+ 7   targ    1000 non-null   float32
+dtypes: float32(6), int64(2)
+memory usage: 39.2 KB
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cproc</span> <span class="o">=</span> <span class="n">Categorify</span><span class="p">()</span>
+<span class="n">cproc</span><span class="o">.</span><span class="n">setup</span><span class="p">(</span><span class="n">test_df</span><span class="p">,</span> <span class="n">cat_names</span><span class="p">)</span>
+
+<span class="k">assert</span> <span class="n">cproc</span><span class="o">.</span><span class="n">isset</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cproc</span><span class="o">.</span><span class="n">cat</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>{&#39;cat_0&#39;: [&#39;#na&#39;, 0, 1, 2], &#39;cat_1&#39;: [&#39;#na&#39;, 0, 1, 2]}
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cproc</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">test_df</span><span class="p">,</span> <span class="n">cat_names</span><span class="p">)</span>
+
+<span class="n">test_df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 1000 entries, 0 to 999
+Data columns (total 8 columns):
+ #   Column  Non-Null Count  Dtype  
+---  ------  --------------  -----  
+ 0   cont_0  1000 non-null   float32
+ 1   cont_1  1000 non-null   float32
+ 2   cont_2  1000 non-null   float32
+ 3   cont_3  1000 non-null   float32
+ 4   cont_4  1000 non-null   float32
+ 5   cat_0   1000 non-null   int8   
+ 6   cat_1   1000 non-null   int8   
+ 7   targ    1000 non-null   float32
+dtypes: float32(6), int8(2)
+memory usage: 25.5 KB
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cproc</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">test_df</span><span class="p">,</span> <span class="n">cat_names</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">cat_names</span><span class="p">:</span>
+    <span class="k">assert</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">notna</span><span class="p">(),</span> <span class="n">col</span><span class="p">]</span> <span class="o">==</span> <span class="n">test_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">notna</span><span class="p">(),</span> <span class="n">col</span><span class="p">])</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Processing-pipeline">Processing pipeline<a class="anchor-link" href="#Processing-pipeline"> </a></h3>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h2 id="ProcPipeline" class="doc_header"><code>class</code> <code>ProcPipeline</code><a href="https://github.com/arampacha/nn4tab/tree/master/nn4tab/data.py#L176" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ProcPipeline</code>(<strong><code>procs</code></strong>:<code>Sequence</code>[<a href="/nn4tab/data.html#TabularProc"><code>TabularProc</code></a>])</p>
+</blockquote>
+<p>Combines data processors into pipeline</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Dataset-and-dataloader">Dataset and dataloader<a class="anchor-link" href="#Dataset-and-dataloader"> </a></h2>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="cont_cat_split" class="doc_header"><code>cont_cat_split</code><a href="https://github.com/arampacha/nn4tab/tree/master/nn4tab/data.py#L209" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>cont_cat_split</code>(<strong><code>df</code></strong>, <strong><code>dep_var</code></strong>=<em><code>None</code></em>, <strong><code>max_card</code></strong>=<em><code>inf</code></em>, <strong><code>ignore</code></strong>=<em><code>[]</code></em>)</p>
+</blockquote>
+<p>Sugests a split of columns of the dataframe to continuous and categorical ommiting dep_var and
+ignore. Split is done based on column datatype: float columns and int with cardinality &gt; max_card
+are treated as continuous, all other - categorical.</p>
 
 </div>
 
@@ -157,7 +1136,995 @@ of :class:<code>~torch.utils.data.DataLoader</code>.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_dl" class="doc_header"><code>get_dl</code><a href="https://github.com/arampacha/nn4tab/tree/master/nn4tab/data.py#L61" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_dl</code>(<strong><code>ds</code></strong>, <strong><code>bs</code></strong>=<em><code>512</code></em>, <strong><code>train</code></strong>=<em><code>True</code></em>, <strong><code>drop_last</code></strong>=<em><code>True</code></em>)</p>
+<h2 id="TabularDataset" class="doc_header"><code>class</code> <code>TabularDataset</code><a href="https://github.com/arampacha/nn4tab/tree/master/nn4tab/data.py#L225" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>TabularDataset</code>(<strong><code>df</code></strong>:<code>DataFrame</code>, <strong><code>cont_names</code></strong>:<code>Sequence</code>[<code>T_co</code>], <strong><code>cat_names</code></strong>:<code>Sequence</code>[<code>T_co</code>], <strong><code>dep_var</code></strong>:<code>Sequence</code>[<code>T_co</code>], <strong><code>procs</code></strong>=<em><code>[]</code></em>, <strong><code>copy</code></strong>=<em><code>True</code></em>) :: <code>Dataset</code></p>
+</blockquote>
+<p>Dataset for continious data.
+Produces tuple containing numpy arrays:
+    x_cat, x_cont, y</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Test-pipe">Test pipe<a class="anchor-link" href="#Test-pipe"> </a></h4>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="p">,</span> <span class="n">cont_names</span><span class="p">,</span> <span class="n">cat_names</span> <span class="o">=</span> <span class="n">fake_data</span><span class="p">(</span><span class="n">preproc</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">nans</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">dep_var</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;targ&#39;</span><span class="p">]</span>
+<span class="n">test_df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 1000 entries, 0 to 999
+Data columns (total 8 columns):
+ #   Column  Non-Null Count  Dtype  
+---  ------  --------------  -----  
+ 0   cont_0  883 non-null    float32
+ 1   cont_1  899 non-null    float32
+ 2   cont_2  912 non-null    float32
+ 3   cont_3  902 non-null    float32
+ 4   cont_4  894 non-null    float32
+ 5   cat_0   891 non-null    object 
+ 6   cat_1   901 non-null    object 
+ 7   targ    1000 non-null   float32
+dtypes: float32(6), object(2)
+memory usage: 39.2+ KB
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">procs</span> <span class="o">=</span> <span class="p">[</span><span class="n">Normalize</span><span class="p">,</span> <span class="n">FillMissing</span><span class="p">,</span> <span class="n">Categorify</span><span class="p">]</span>
+<span class="n">pipe</span> <span class="o">=</span> <span class="n">ProcPipeline</span><span class="p">(</span><span class="n">procs</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ds</span> <span class="o">=</span> <span class="n">TabularDataset</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">cont_names</span><span class="p">,</span> <span class="n">cat_names</span><span class="p">,</span> <span class="n">dep_var</span><span class="p">)</span>
+<span class="n">ds</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>cont_0</th>
+      <th>cont_1</th>
+      <th>cont_2</th>
+      <th>cont_3</th>
+      <th>cont_4</th>
+      <th>cat_0</th>
+      <th>cat_1</th>
+      <th>targ</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.237776</td>
+      <td>4.726856</td>
+      <td>0.328851</td>
+      <td>5.035037</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>C</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>-0.165130</td>
+      <td>4.755350</td>
+      <td>1.774184</td>
+      <td>1.690559</td>
+      <td>2.819697</td>
+      <td>A</td>
+      <td>A</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>-0.801118</td>
+      <td>5.582966</td>
+      <td>-5.896749</td>
+      <td>3.399724</td>
+      <td>3.353442</td>
+      <td>C</td>
+      <td>NaN</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>-2.345072</td>
+      <td>4.445452</td>
+      <td>-1.267434</td>
+      <td>0.292013</td>
+      <td>8.225743</td>
+      <td>A</td>
+      <td>A</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>-3.939306</td>
+      <td>-1.294417</td>
+      <td>-2.017090</td>
+      <td>4.966501</td>
+      <td>2.186796</td>
+      <td>C</td>
+      <td>B</td>
+      <td>0.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pipe</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">ds</span><span class="p">)</span>
+<span class="n">ds</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>cont_0</th>
+      <th>cont_1</th>
+      <th>cont_2</th>
+      <th>cont_3</th>
+      <th>cont_4</th>
+      <th>cat_0</th>
+      <th>cat_1</th>
+      <th>targ</th>
+      <th>cont_0_na</th>
+      <th>cont_1_na</th>
+      <th>cont_2_na</th>
+      <th>cont_3_na</th>
+      <th>cont_4_na</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.715700</td>
+      <td>-0.030405</td>
+      <td>0.886719</td>
+      <td>1.466304</td>
+      <td>2.773549e-08</td>
+      <td>0</td>
+      <td>3</td>
+      <td>1.0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.559190</td>
+      <td>-0.019687</td>
+      <td>1.466657</td>
+      <td>-0.767848</td>
+      <td>-2.901395e-01</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1.0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.312139</td>
+      <td>0.291596</td>
+      <td>-1.611295</td>
+      <td>0.373895</td>
+      <td>-1.118203e-01</td>
+      <td>3</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>-0.287613</td>
+      <td>-0.136246</td>
+      <td>0.246211</td>
+      <td>-1.702093</td>
+      <td>1.515969e+00</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0.0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>-0.906897</td>
+      <td>-2.295129</td>
+      <td>-0.054587</td>
+      <td>1.420521</td>
+      <td>-5.015854e-01</td>
+      <td>3</td>
+      <td>2</td>
+      <td>0.0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">test_df_processed</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">ds</span><span class="o">.</span><span class="n">cont_names</span><span class="p">,</span> <span class="n">ds</span><span class="o">.</span><span class="n">cat_names</span><span class="p">,</span> <span class="n">dep_var</span><span class="o">=</span><span class="n">dep_var</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="p">,</span> <span class="n">cont_names</span><span class="p">,</span> <span class="n">cat_names</span> <span class="o">=</span> <span class="n">fake_data</span><span class="p">(</span><span class="n">preproc</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">dep_var</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;targ&#39;</span><span class="p">]</span>
+<span class="n">procs</span> <span class="o">=</span> <span class="p">[</span><span class="n">Normalize</span><span class="p">,</span> <span class="n">FillMissing</span><span class="p">,</span> <span class="n">Categorify</span><span class="p">]</span>
+<span class="n">pipe</span> <span class="o">=</span> <span class="n">ProcPipeline</span><span class="p">(</span><span class="n">procs</span><span class="p">)</span>
+<span class="n">ds</span> <span class="o">=</span> <span class="n">TabularDataset</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">cont_names</span><span class="p">,</span> <span class="n">cat_names</span><span class="p">,</span> <span class="n">dep_var</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pipe</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">ds</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">test_df_processed</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">ds</span><span class="o">.</span><span class="n">cont_names</span><span class="p">,</span> <span class="n">ds</span><span class="o">.</span><span class="n">cat_names</span><span class="p">,</span> <span class="n">dep_var</span><span class="o">=</span><span class="n">dep_var</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Test-dataset">Test dataset<a class="anchor-link" href="#Test-dataset"> </a></h4>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="p">,</span> <span class="n">cont_names</span><span class="p">,</span> <span class="n">cat_names</span> <span class="o">=</span> <span class="n">fake_data</span><span class="p">()</span>
+<span class="n">dep_var</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;targ&#39;</span><span class="p">]</span>
+<span class="n">procs</span> <span class="o">=</span> <span class="p">[</span><span class="n">Normalize</span><span class="p">,</span> <span class="n">FillMissing</span><span class="p">,</span> <span class="n">Categorify</span><span class="p">]</span>
+<span class="n">pipe</span> <span class="o">=</span> <span class="n">ProcPipeline</span><span class="p">(</span><span class="n">procs</span><span class="p">)</span>
+<span class="n">ds</span> <span class="o">=</span> <span class="n">TabularDataset</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">cont_names</span><span class="p">,</span> <span class="n">cat_names</span><span class="p">,</span> <span class="n">dep_var</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ds</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>(array([2, 1]),
+ array([-1.7382663 , -1.3366427 , -1.3611068 , -0.35161713, -2.3125815 ],
+       dtype=float32),
+ array([0.], dtype=float32))</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">test_df_processed</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">ds</span><span class="o">.</span><span class="n">cont_names</span><span class="p">,</span> <span class="n">ds</span><span class="o">.</span><span class="n">cat_names</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="p">,</span> <span class="n">cont_names</span><span class="p">,</span> <span class="n">cat_names</span> <span class="o">=</span> <span class="n">fake_data</span><span class="p">(</span><span class="n">preproc</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">dep_var</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;targ&#39;</span><span class="p">]</span>
+<span class="n">procs</span> <span class="o">=</span> <span class="p">[</span><span class="n">Normalize</span><span class="p">,</span> <span class="n">FillMissing</span><span class="p">,</span> <span class="n">Categorify</span><span class="p">]</span>
+<span class="n">pipe</span> <span class="o">=</span> <span class="n">ProcPipeline</span><span class="p">(</span><span class="n">procs</span><span class="p">)</span>
+<span class="n">ds</span> <span class="o">=</span> <span class="n">TabularDataset</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">cont_names</span><span class="p">,</span> <span class="n">cat_names</span><span class="p">,</span> <span class="n">dep_var</span><span class="p">,</span> <span class="n">procs</span><span class="o">=</span><span class="n">pipe</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">test_df_processed</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">ds</span><span class="o">.</span><span class="n">cont_names</span><span class="p">,</span> <span class="n">ds</span><span class="o">.</span><span class="n">cat_names</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ds</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>cont_0</th>
+      <th>cont_1</th>
+      <th>cont_2</th>
+      <th>cont_3</th>
+      <th>cont_4</th>
+      <th>cat_0</th>
+      <th>cat_1</th>
+      <th>targ</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.712654</td>
+      <td>-0.031417</td>
+      <td>0.886253</td>
+      <td>1.480729</td>
+      <td>-0.639405</td>
+      <td>3</td>
+      <td>3</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.557549</td>
+      <td>-0.020897</td>
+      <td>1.475774</td>
+      <td>-0.782973</td>
+      <td>-0.294020</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.312715</td>
+      <td>0.284651</td>
+      <td>-1.653041</td>
+      <td>0.373872</td>
+      <td>-0.114436</td>
+      <td>3</td>
+      <td>2</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>-0.281655</td>
+      <td>-0.135309</td>
+      <td>0.235161</td>
+      <td>-1.729575</td>
+      <td>1.524899</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>-0.895380</td>
+      <td>-2.254419</td>
+      <td>-0.070608</td>
+      <td>1.434341</td>
+      <td>-0.506966</td>
+      <td>3</td>
+      <td>2</td>
+      <td>0.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="p">,</span> <span class="n">cont_names</span><span class="p">,</span> <span class="n">cat_names</span> <span class="o">=</span> <span class="n">fake_data</span><span class="p">(</span><span class="n">preproc</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">nans</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">dep_var</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;targ&#39;</span><span class="p">]</span>
+<span class="n">procs</span> <span class="o">=</span> <span class="p">[</span><span class="n">Normalize</span><span class="p">,</span> <span class="n">FillMissing</span><span class="p">,</span> <span class="n">Categorify</span><span class="p">]</span>
+<span class="n">pipe</span> <span class="o">=</span> <span class="n">ProcPipeline</span><span class="p">(</span><span class="n">procs</span><span class="p">)</span>
+<span class="n">ds</span> <span class="o">=</span> <span class="n">TabularDataset</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">cont_names</span><span class="p">,</span> <span class="n">cat_names</span><span class="p">,</span> <span class="n">dep_var</span><span class="p">,</span> <span class="n">procs</span><span class="o">=</span><span class="n">pipe</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ds</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>(array([0, 3, 1, 1, 1, 1, 2]),
+ array([ 7.1570003e-01, -3.0404553e-02,  8.8671887e-01,  1.4663039e+00,
+         2.7735494e-08], dtype=float32),
+ array([1.], dtype=float32))</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">test_df_processed</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">ds</span><span class="o">.</span><span class="n">cont_names</span><span class="p">,</span> <span class="n">ds</span><span class="o">.</span><span class="n">cat_names</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ds</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 1000 entries, 0 to 999
+Data columns (total 13 columns):
+ #   Column     Non-Null Count  Dtype  
+---  ------     --------------  -----  
+ 0   cont_0     1000 non-null   float32
+ 1   cont_1     1000 non-null   float32
+ 2   cont_2     1000 non-null   float32
+ 3   cont_3     1000 non-null   float32
+ 4   cont_4     1000 non-null   float32
+ 5   cat_0      1000 non-null   int8   
+ 6   cat_1      1000 non-null   int8   
+ 7   targ       1000 non-null   float32
+ 8   cont_0_na  1000 non-null   int8   
+ 9   cont_1_na  1000 non-null   int8   
+ 10  cont_2_na  1000 non-null   int8   
+ 11  cont_3_na  1000 non-null   int8   
+ 12  cont_4_na  1000 non-null   int8   
+dtypes: float32(6), int8(7)
+memory usage: 30.4 KB
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Test-adult-ds">Test adult ds<a class="anchor-link" href="#Test-adult-ds"> </a></h4>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s1">&#39;./datasets/adult.csv&#39;</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;salary&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;salary&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">==</span><span class="s1">&#39;&gt;=50k&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int8</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dep_var</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;salary&#39;</span><span class="p">]</span>
+<span class="n">cont_names</span><span class="p">,</span> <span class="n">cat_names</span> <span class="o">=</span> <span class="n">cont_cat_split</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">dep_var</span><span class="p">,</span> <span class="n">max_card</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">cont_names</span><span class="p">,</span> <span class="n">cat_names</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>([&#39;age&#39;,
+  &#39;fnlwgt&#39;,
+  &#39;education-num&#39;,
+  &#39;capital-gain&#39;,
+  &#39;capital-loss&#39;,
+  &#39;hours-per-week&#39;],
+ [&#39;workclass&#39;,
+  &#39;education&#39;,
+  &#39;marital-status&#39;,
+  &#39;occupation&#39;,
+  &#39;relationship&#39;,
+  &#39;race&#39;,
+  &#39;sex&#39;,
+  &#39;native-country&#39;])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">procs</span> <span class="o">=</span> <span class="p">[</span><span class="n">Normalize</span><span class="p">,</span> <span class="n">FillMissing</span><span class="p">,</span> <span class="n">Categorify</span><span class="p">]</span>
+<span class="n">ds</span> <span class="o">=</span> <span class="n">TabularDataset</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">cont_names</span><span class="p">,</span> <span class="n">cat_names</span><span class="p">,</span> <span class="n">dep_var</span><span class="p">,</span> <span class="n">procs</span><span class="o">=</span><span class="n">procs</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">test_df_processed</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">ds</span><span class="o">.</span><span class="n">cont_names</span><span class="p">,</span> <span class="n">ds</span><span class="o">.</span><span class="n">cat_names</span><span class="p">,</span> <span class="n">ds</span><span class="o">.</span><span class="n">dep_var</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ds</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>(array([7, 5, 4, 0, 2, 2, 1, 7, 1]),
+ array([ 0.76378465, -0.8380709 ,  0.74628264, -0.14591825,  4.5034127 ,
+        -0.0354289 ], dtype=float32),
+ array([1.], dtype=float32))</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Utils">Utils<a class="anchor-link" href="#Utils"> </a></h3>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="get_dsets" class="doc_header"><code>get_dsets</code><a href="https://github.com/arampacha/nn4tab/tree/master/nn4tab/data.py#L252" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_dsets</code>(<strong><code>df</code></strong>:<code>DataFrame</code>, <strong><code>cont_names</code></strong>:<code>Sequence</code>[<code>T_co</code>], <strong><code>cat_names</code></strong>:<code>Sequence</code>[<code>T_co</code>], <strong><code>dep_var</code></strong>:<code>Sequence</code>[<code>T_co</code>], <strong><code>procs</code></strong>=<em><code>[]</code></em>, <strong><code>splits</code></strong>=<em><code>None</code></em>, <strong><code>stratify</code></strong>=<em><code>True</code></em>)</p>
 </blockquote>
 
 </div>
@@ -177,7 +2144,59 @@ of :class:<code>~torch.utils.data.DataLoader</code>.</p>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">notebook2script</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">procs</span> <span class="o">=</span> <span class="p">[</span><span class="n">Normalize</span><span class="p">,</span> <span class="n">FillMissing</span><span class="p">,</span> <span class="n">Categorify</span><span class="p">]</span>
+<span class="n">train_ds</span><span class="p">,</span> <span class="n">valid_ds</span> <span class="o">=</span> <span class="n">get_dsets</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">cont_names</span><span class="p">,</span> <span class="n">cat_names</span><span class="p">,</span> <span class="n">dep_var</span><span class="p">,</span> <span class="n">procs</span><span class="o">=</span><span class="n">procs</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">test_df_processed</span><span class="p">(</span><span class="n">train_ds</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">train_ds</span><span class="o">.</span><span class="n">cont_names</span><span class="p">,</span> <span class="n">train_ds</span><span class="o">.</span><span class="n">cat_names</span><span class="p">,</span> <span class="n">train_ds</span><span class="o">.</span><span class="n">dep_var</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">test_df_processed</span><span class="p">(</span><span class="n">valid_ds</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">valid_ds</span><span class="o">.</span><span class="n">cont_names</span><span class="p">,</span> <span class="n">valid_ds</span><span class="o">.</span><span class="n">cat_names</span><span class="p">,</span> <span class="n">valid_ds</span><span class="o">.</span><span class="n">dep_var</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">train_ds</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">train_ds</span><span class="o">.</span><span class="n">cont_names</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -189,14 +2208,88 @@ of :class:<code>~torch.utils.data.DataLoader</code>.</p>
 
 <div class="output_area">
 
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Converted 00_core.ipynb.
-Converted 01_data.ipynb.
-Converted 02_model.ipynb.
-Converted 03_learner.ipynb.
-Converted index.ipynb.
-</pre>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>age              -1.690311e-16
+fnlwgt            8.387196e-17
+education-num     1.673339e-15
+capital-gain      1.216058e-15
+capital-loss     -6.312987e-17
+hours-per-week   -1.571971e-16
+dtype: float64</pre>
 </div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">valid_ds</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">valid_ds</span><span class="o">.</span><span class="n">cont_names</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>age               0.018169
+fnlwgt           -0.002425
+education-num    -0.020961
+capital-gain     -0.014558
+capital-loss      0.000794
+hours-per-week   -0.018492
+dtype: float64</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="get_dl" class="doc_header"><code>get_dl</code><a href="https://github.com/arampacha/nn4tab/tree/master/nn4tab/data.py#L266" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_dl</code>(<strong><code>ds</code></strong>, <strong><code>bs</code></strong>=<em><code>512</code></em>, <strong><code>train</code></strong>=<em><code>True</code></em>, <strong><code>drop_last</code></strong>=<em><code>True</code></em>)</p>
+</blockquote>
+
+</div>
+
 </div>
 
 </div>

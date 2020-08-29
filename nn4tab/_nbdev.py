@@ -4,6 +4,16 @@ __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
 index = {"test_func": "00_core.ipynb",
          "cont_cat_split": "01_data.ipynb",
+         "fake_data": "00a_test_utils.ipynb",
+         "test_normalized": "00a_test_utils.ipynb",
+         "test_nans": "00a_test_utils.ipynb",
+         "test_categorical": "00a_test_utils.ipynb",
+         "test_df_processed": "00a_test_utils.ipynb",
+         "TabularProc": "01_data.ipynb",
+         "Normalize": "01_data.ipynb",
+         "FillMissing": "01_data.ipynb",
+         "Categorify": "01_data.ipynb",
+         "ProcPipeline": "01_data.ipynb",
          "TabularDataset": "01_data.ipynb",
          "get_dsets": "01_data.ipynb",
          "get_dl": "01_data.ipynb",
@@ -22,6 +32,7 @@ index = {"test_func": "00_core.ipynb",
          "LearnerV0": "03_learner.ipynb"}
 
 modules = ["core.py",
+           "test_utils.py",
            "data.py",
            "model.py",
            "learner.py"]
