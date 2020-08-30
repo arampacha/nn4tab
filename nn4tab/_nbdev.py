@@ -29,7 +29,8 @@ index = {"test_func": "00_core.ipynb",
          "AverageMeter": "03_learner.ipynb",
          "accuracy_binary": "03_learner.ipynb",
          "Callback": "03_learner.ipynb",
-         "LearnerV0": "03_learner.ipynb"}
+         "LearnerV0": "03_learner.ipynb",
+         "LearnerV1": "03_learner.ipynb"}
 
 modules = ["core.py",
            "test_utils.py",
